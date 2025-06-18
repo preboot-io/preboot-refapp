@@ -1,0 +1,60 @@
+.table {
+    width: 100%;
+    flex: 1;
+    background-color: var(--mantine-color-body);
+}
+
+.table thead {
+    height: 4rem;
+}
+
+.table th {
+    background-color: var(--mantine-color-default-hover);
+    color: var(--mantine-color-text);
+    font-weight: var(--mantine-heading-font-weight);
+    font-size: var(--mantine-font-size-md);
+    justify-items: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    hyphens: auto;
+}
+
+.table thead[data-sticky-header="true"] {
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.15);
+}
+
+.table td[data-sticky-column="true"] {
+    background-color: var(--mantine-color-body);
+    border-right: 2px solid var(--mantine-color-default-border);
+    font-weight: 600;
+    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.15);
+}
+
+.table th[data-sticky-column="true"] {
+    border-right: 2px solid var(--mantine-color-default-border);
+    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.15);
+}
+
+.table tr:not(:nth-child(even)) td[data-sticky-column="true"] {
+    background-color: var(--table-striped-color) !important;
+}
+
+.table tr:nth-child(odd) td[data-sticky-column="true"] {
+    background-color: var(--table-striped-color) !important;
+}
+
+.table th[data-sticky-action="true"] {
+    border-left: 2px solid var(--mantine-color-default-border);
+    box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: var(--mantine-spacing-md);
+    box-shadow: var(--mantine-shadow-xs);
+    padding-top: 0;
+}

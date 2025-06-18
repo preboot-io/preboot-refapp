@@ -1,0 +1,11 @@
+.input {
+    &[data-variant='underline'] {
+        border-bottom: 2px solid;
+        border-radius: 0;
+        border-color: var(--mantine-color-default-border);
+
+        &:focus {
+            border-color: var(--mantine-primary-color-filled);
+        }
+    }
+}

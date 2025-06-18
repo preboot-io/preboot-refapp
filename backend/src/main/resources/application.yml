@@ -1,0 +1,72 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/refapp}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: ${DATABASE_POOL_SIZE:10}
+      minimum-idle: ${DATABASE_MIN_IDLE:2}
+      connection-timeout: ${DATABASE_CONNECTION_TIMEOUT:30000}
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+  mail:
+    # Default is local MailDev server
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:false}
+          starttls:
+            enable: ${MAIL_SMTP_STARTTLS:false}
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+# For application.yml
+springdoc:
+  api-docs:
+    path: /api/v3/api-docs
+  swagger-ui:
+    path: /api/swagger-ui.html
+
+preboot:
+  security:
+    public-endpoints:
+      - /api/public/**
+      - /api/healthcheck
+      - /api/swagger-ui.html
+      - /api/swagger-ui/**
+      - /api/v3/api-docs/**
+      - /api/registration
+    cors-allowed-origins:
+      - ${CORS_ALLOWED_ORIGIN:http://localhost:5173}
+    enable-csrf: false
+    jwt-secret: yourVeryLongSecretKeyHereXXXXXXXXXXXXXXXX  # Should be at least 256 bits
+    session-timeout-minutes: 15
+    long-session-timeout-days: 15
+    password-reset-token-timeout-in-days: 2
+    activation-token-timeout-in-days: 30
+  accounts:
+    default-timezone: UTC
+    default-language: en
+    registration-enabled: true
+    default-roles:
+      - "ADMIN"
+  auth-emails:
+    password-reset-url: ${AUTH_EMAILS_PASSWORD_RESET_URL:http://localhost:5173/reset-password}
+    password-activation-url: ${AUTH_EMAILS_PASSWORD_ACTIVATION_URL:http://localhost:5173/activate-account}
+    sender-email: ${AUTH_EMAILS_SENDER_EMAIL:test@system.local}
+
+app:
+  task-runner:
+    max-concurrent-tasks: 10
+  configuration:
+    disable-emails: false # Set to true to disable sending emails
+logging:
+  level:
+    io.preboot.refapp.config: INFO
